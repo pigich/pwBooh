@@ -1,0 +1,6 @@
+Pigich true
+Teta false
+Администратор false
+бухгалтер true
+Гость false
+тестер false
