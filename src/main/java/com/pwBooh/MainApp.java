@@ -10,7 +10,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -22,14 +21,14 @@ import java.io.IOException;
 
 import static com.pwBooh.controllers.PrintViewController.putListPrintGrid;
 import static com.pwBooh.util.cmdTools.getPrintList;
-import static com.pwBooh.util.cmdTools.printUsersData;
 
 
 public class MainApp extends Application {
 
-    private final static String PROG_VERSION = "0.1";
+    private final static String PROG_VERSION = "0.13";
     public static AnchorPane anchorPane;
     public static AnchorPane PrintDialogPage;
+    public static GridPane gridPane;
     public static ObservableList<Logins> loginsData = FXCollections.observableArrayList();
     private static Stage primaryStage;
     private static BorderPane rootLayout;
@@ -98,7 +97,7 @@ public class MainApp extends Application {
             printDialogStage.initModality(Modality.WINDOW_MODAL);
             printDialogStage.initOwner(primaryStage);
             printDialogStage.setResizable(false);
-            GridPane gridPane = putListPrintGrid(getPrintList());
+            gridPane = putListPrintGrid(getPrintList());
             GridPane.setHalignment(gridPane, HPos.CENTER);
             PrintDialogPage.getChildren().addAll(gridPane);
             Scene scene = new Scene(PrintDialogPage);

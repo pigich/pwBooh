@@ -22,7 +22,7 @@ public class ReadWrite {
             String line;
             List<Logins> list = new ArrayList<>();
             while ((line = br.readLine()) != null) {
-                String cvsSplitBy = " ";
+                String cvsSplitBy = "  ";
                 String[] companyData = line.split(cvsSplitBy);
                 String login = companyData[0];
                 String checked = companyData[1];
@@ -48,7 +48,7 @@ public class ReadWrite {
                 new OutputStreamWriter(
                         new FileOutputStream("config.txt"), "windows-1251")))) {
             for (Logins aLoginsData : loginsData) {
-                out.println(aLoginsData);
+                out.println(aLoginsData.getLogin() +"  " + aLoginsData.isChecked());
             }
             label.setTextFill(Color.GREEN);
             label.setText("Файл настроек сохранен");

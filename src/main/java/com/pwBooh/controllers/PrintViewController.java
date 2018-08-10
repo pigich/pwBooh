@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 import static com.pwBooh.MainApp.PrintDialogPage;
+import static com.pwBooh.MainApp.gridPane;
 import static com.pwBooh.util.cmdTools.printUsersData;
 
 public class PrintViewController {
@@ -46,7 +47,6 @@ public class PrintViewController {
 
     @FXML
     public void printList() {
-        printUsersData(PrintDialogPage);
-
+        printUsersData(gridPane);
     }
 }

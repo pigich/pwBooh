@@ -6,7 +6,10 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -19,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.pwBooh.MainApp.*;
-import static com.pwBooh.controllers.PrintViewController.putListPrintGrid;
 import static com.pwBooh.pojos.UserData.*;
 import static com.pwBooh.util.ReadWrite.readDataFromFile;
 import static com.pwBooh.util.ReadWrite.writeDataToFile;
@@ -198,8 +200,8 @@ public class CheckBoxTableCellTest {
         MainApp.getScene().addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(!errorMessage.getText().equals(""))
-                errorMessage.setText("");
+                if (!errorMessage.getText().equals(""))
+                    errorMessage.setText("");
             }
         });
 
@@ -259,7 +261,7 @@ public class CheckBoxTableCellTest {
 //            System.out.println(s);
 //        }
         showPrintDialog();
-        putListPrintGrid(getPrintList());
+//        putListPrintGrid(getPrintList());
     }
 
     private void firstInitialization() {

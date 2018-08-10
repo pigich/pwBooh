@@ -33,27 +33,27 @@ public class cmdTools {
     public static ArrayList<String> getList() {
         return list;
     }
-
+    /**
+     * Вывод списка логинов на компьютере
+     */
     public static String getShowUserscmd() {
         return "net user";
     }
+    /**
+     * Парсинг логинов из списка
+     */
     public static void parseUsersFromCmd(String output) {
         String out = output.substring(output.lastIndexOf("-") + 1, output.length());
-        String test = out.replaceAll("\n", "").replaceAll("Команда выполнена успешно.", "");
-        String abc[] = test.split(" ");
+        String test = out.replaceAll("\n", "").replaceAll("Команда выполнена успешно.", "").trim();
+        String abc[] = test.split("  ");
 
         for (String anAbc : abc) {
             if (!anAbc.equals(""))
-                list.add(anAbc);
+                list.add(anAbc.trim());
         }
     }
 
-    public static void printOutput() {
-        for (String s : list
-                ) {
-            System.out.println(s);
-        }
-    }
+
     public static void deleteUserFromList(ArrayList<String> list) {
         String[] pattern = {"Pavel", "Администратор", "Гость" };
         for (String s : pattern
@@ -85,41 +85,38 @@ public class cmdTools {
         }
         return output.toString();
     }
+    /**
+     * Метод выполняет команды через командную строку по замене паролей из списка
+     * и вносит данные в список для распечатки
+     */
     public static void changePwOnServer(ArrayList<String> list) {
         printList.clear();
         for (String login : list
                 ) {
             String pw = generatePassword(getPasswordLength());
-            executeCommand("net user " + login + " " + pw);
+            executeCommand("net user " + "\""+ login +"\"" + " " + pw);
             printList.add("Логин: " + login + " Пароль: " + pw);
+            executeCommand("msg " + "\""+ login +"\"" +" " +"\"" +"!!! пароль для доступа на сервер был изменен, для доступа к вашей папке на сервере запустите changePw.bat и введите новый пароль !!!"+"\"");
         }
     }
+    /**
+     * Метод распечатывает на принтере ноду
+     */
     public static void printUsersData(Node node) {
         Printer printer = Printer.getDefaultPrinter();
         PageLayout pageLayout = printer.createPageLayout(Paper.A4, PageOrientation.PORTRAIT, Printer.MarginType.HARDWARE_MINIMUM);
-        final double scaleX = (pageLayout.getPrintableWidth()) / node.getBoundsInParent().getWidth();
-        final double scaleY = (pageLayout.getPrintableHeight()) / node.getBoundsInParent().getHeight();
-        node.getTransforms().add(new Scale(scaleX, scaleY));
         PrinterJob job =PrinterJob.createPrinterJob();
         if (job != null ){
-            boolean success = job.printPage(node);
-//            System.out.println("printed");
+            boolean success = job.printPage(pageLayout, node);
             if (success){
-//                System.out.println(success);
                 job.endJob();
             }
         }
-//        for (String s : getPrintList()
-//                ) {
-//            System.out.println("-------------------------------------------------------");
-//            System.out.println("|                                                     |");
-//            System.out.println("|            " + s + "            |");
-//            System.out.println("|                                                     |");
-//            System.out.println("-------------------------------------------------------");
-//        }
-//        System.out.println("\n\n");
     }
-    //Метод генерирует пароли
+
+/**
+* Метод генерирует пароли
+*/
     private static String generatePassword(int len) {
         StringBuilder sb = new StringBuilder(len);
         for (int i = 0; i < len; i++)
